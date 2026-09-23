@@ -1,0 +1,305 @@
+Question 1 of 20
+
+A company is implementing AI governance policies. The policies require all FM interactions to be secured with guardrails. The company configures Amazon Bedrock guardrails. The company must ensure that all InvokeModel and Converse API calls to FMs apply the guardrails.
+
+Which solution will enforce guardrail compliance for the API calls in the MOST operationally efficient way?
+
+A. Create an AWS Lambda function that validates and enforces guardrails before proxying requests to Amazon Bedrock. Use the Lambda function as the exclusive endpoint for all FM interactions.
+
+B. Configure IAM policies for the InvokeModel and Converse API calls with the bedrock:GuardrailIdentifier condition key. Apply the policies to all IAM roles that access the Amazon Bedrock FMs.
+
+C. Configure IAM policies for the InvokeModel and Converse API calls with both bedrock:GuardrailIdentifier and bedrock:PromptRouterArn condition keys. Apply the policies to all IAM roles. Require prompt router validation before allowing access to Amazon Bedrock FMs.
+
+D. Store guardrail identifiers in AWS Systems Manager Parameter Store. Create an AWS Lambda function that retrieves the guardrail identifier from Parameter Store each time before making calls to Amazon Bedrock FMs.
+
+-
+Question 2 of 20
+
+An ecommerce company has an application that uses Amazon Bedrock to generate product descriptions and recommendations. Currently, the application resides in a single AWS Region. When invoking a model in Amazon Bedrock during peak periods, the application receives an error. The error message says, "Too many requests, please wait before trying again."
+
+
+The company must increase the throughput for invocations during peak periods without introducing additional operational overhead. The company must maintain compatibility with the existing Amazon Bedrock API. The company must use the same FM. 
+
+
+Which solution will meet these requirements in the MOST cost-effective way?
+
+A. Create an AWS Lambda function to invoke the model in Amazon Bedrock with the original Region as the default. Configure the Lambda function to fall back to Amazon Bedrock in a secondary Region.
+
+B. Use provisioned throughput to provision a higher level of throughput for the FM.
+
+C. Use prompt routing to distribute traffic across multiple FMs from the same family.
+
+D. Use cross-Region inference to distribute traffic across multiple Regions within a geographic area.
+
+-
+Question 3 of 20
+
+A financial services company needs to use Amazon Bedrock to create an AI assistant that will help customer support representatives across multiple business units. A GenAI developer must ensure that prompt templates are properly governed through approval workflows. Additionally, the company requires comprehensive logging of all model invocations with a 7-year retention period for regulatory compliance.
+
+Which combination of steps will meet these requirements with MINIMAL operational overhead?
+(Select TWO)
+A. Enable Amazon Bedrock model invocation logging with Amazon S3 as the destination. Enable S3 Object Lock with compliance retention mode set to 7 years. Create separate prefixes for each business unit.
+B. Enable AWS CloudTrail data events for all Amazon Bedrock APIs. Deliver the logs to CloudTrail Lake with a 7-year retention setting. Tag each event with the business unit ID. Run CloudTrail Lake queries to monitor prompt activity.
+C. Store prompt templates in Amazon DynamoDB tables with composite keys partitioned by business units. Implement IAM policies that grant role-based access to business units for template approval. Use DynamoDB item-level permissions to control prompt template modifications and approvals.
+D. Use Amazon Bedrock Prompt Management with multi-stage approval workflows. Use IAM policies that require multi-party authorization.
+E. Set up Amazon EventBridge rules to capture Amazon Bedrock model invocation events. Route events to Amazon CloudWatch Logs groups that are organized by business unit. Export the logs to Amazon S3. Enable S3 Object Lock with compliance retention mode set to 7 years.
+
+–
+Question 4 of 20
+
+A GenAI developer is implementing a solution to create images from text descriptions. The GenAI developer successfully tested a pre-trained Hugging Face model by using Amazon SageMaker JumpStart. Now, the GenAI developer needs to deploy the model so that users can generate images on demand.
+The solution must use GPUs for inference. The solution must be able to handle text datasets up to 50 MB with image descriptions. The solution requires responses within 15 minutes.
+
+Which deployment strategy will meet these requirements?
+
+A. Create a SageMaker AI batch transform job that uses an accelerated computing SageMaker AI instance type to manage image generation. Create an AWS Lambda function to start the batch transform job.
+
+B. Deploy a SageMaker Asynchronous Inference endpoint that uses an accelerated computing SageMaker AI instance type. Create an AWS Lambda function for on-demand invocation of the SageMaker AI endpoint to manage image generation.
+
+C. Deploy a SageMaker Serverless Inference endpoint that uses a general purpose SageMaker AI instance type. Create an AWS Lambda function for on-demand invocation of the SageMaker AI endpoint to manage image generation.
+
+D. Deploy a SageMaker Real-Time Inference endpoint that uses an accelerated computing SageMaker AI instance type. Create an AWS Lambda function for on-demand invocation of the SageMaker AI endpoint to manage image generation.
+
+–
+Question 5 of 20
+
+A financial services company operates RAG for an application that answers user questions by using internal market analysis reports. The application uses Amazon Bedrock for the embedding model. The application uses an Amazon OpenSearch Service cluster as the vector store. An AWS Lambda function performs the embedding and search logic.
+After a recent code update to the Lambda function, the application starts returning generic responses. For example, the application returns “no relevant information found” even for questions that previously returned accurate answers. Amazon CloudWatch Logs shows no errors. AWS X-Ray confirms successful FM invocation. The OpenSearch Service cluster is healthy. Query latency remains normal.
+
+What is the cause of this issue?
+
+A. The Amazon Bedrock FM temperature parameter was increased.
+
+B. The Lambda function’s IAM role is missing the permission for bedrock:InvokeModel.
+
+C. The document embeddings in OpenSearch Service were deleted during the application update and have not been re-indexed.
+
+D. The updated Lambda function uses a different version of the embedding model.
+
+-
+Question 6 of 20
+
+A company is implementing a systematic evaluation process for a newly deployed FM in Amazon Bedrock. The company wants to replace an existing model in production with a new model. The change to the new model is dependent on the new model demonstrating better performance than the existing model. The company must follow a sequential validation process. To ensure evaluation rigor, each step must be reviewed and approved before proceeding to the next step. Select and order each step from the following list to implement the evaluation workflow. Select each step one time.
+• Conduct A/B testing to compare the new model against the existing production model.
+• Create a test dataset with diverse scenarios and edge cases.
+• Define evaluation metrics for relevance, factual accuracy, and fluency.
+• Implement automated quality gates by using AWS Step Functions.
+• Analyze the results and generate a comprehensive evaluation report.
+1:
+2:
+3:
+4:
+5:
+
+-
+Question 7 of 20
+
+
+A financial services company is developing a research agent that processes complex financial data queries. The company must deploy existing Python agent code to Amazon Bedrock AgentCore Runtime. The company wants to reduce infrastructure management overhead and operational complexity.
+The agent must be able to handle quick data lookups that require sub-second responses. The agent must be able to handle comprehensive research report generation. For example, streaming responses over several minutes. The solution must automatically manage HTTP server configuration, endpoint routing, and health monitoring.
+
+Which deployment approaches will meet these requirements with MINIMAL operational overhead?
+(Select TWO)
+A. Deploy the agent on Amazon ECS on AWS Fargate by using a custom container image that runs the AgentCore SDK application.
+B. Implement the AgentCore SDK with the @app.entrypoint decorator to automatically handle server setup and endpoint management.
+C. Implement a FastAPI server with a configuration of /invocations and /ping endpoints and container orchestration.
+D. Deploy the agent by using the AgentCore starter toolkit for automated packaging, containerization, and deployment workflows.
+E. Deploy the agent on Amazon SageMaker AI real-time endpoints by using a custom inference container.
+
+-
+Question 8 of 20
+
+A GenAI developer deployed a fine-tuned LLM to an Amazon SageMaker AI endpoint. The GenAI developer used the default serving configuration for continuous batching with the AMI including the Deep Java Library (DJL). The model is being served on GPU-based Amazon EC2 instances, each with 8 GPUs. As the model scales to production, the GenAI developer discovers that many instances are needed to meet traffic demands. The GenAI developer wants to avoid increased costs from the overutilization.
+The GenAI developer analyzes logs. The GenAI developer discovers that the maximum I/O sequence length in real requests is 10 times smaller than what the model was originally configured to handle. Additionally, the current concurrency for each instance is low. Profiling shows that the model’s weights and activations can fit entirely within 4 GPUs.
+
+Which combination of steps can the GenAI developer take to improve resource utilization?
+(Select TWO)
+A. Enable speculative decoding to reduce response latency for each request.
+B. Split the model across all 8 GPUs by using a tensor parallelism degree of 8 to improve memory efficiency.
+C. Reduce the model’s maximum sequence length to provide a higher rolling batch size for each GPU.
+D. Increase the number of SageMaker AI instances and spread requests more evenly to reduce the load for each instance.
+E. Use tensor parallelism with a degree of 4 to deploy two model replicas for each instance.
+
+-
+Question 9 of 20
+
+A company is building a diagnostic imaging application. The application needs to perform similarity searches across 50 million images to assist with diagnosing and treating patients. The application must process new images daily. The application will perform similarity searches infrequently when users need to find similar cases for reference. The company wants a cost-effective solution that provides responsive search performance without requiring infrastructure management.
+
+Which solution will meet these requirements MOST cost-effectively?
+
+A. Create an Amazon S3 vector bucket with vector indexes to store image embeddings and perform similarity searches.
+
+B. Store image vectors in Amazon RDS for PostgreSQL. Use the pgvector extension to perform similarity searches using indexed vector embeddings.
+
+C. Use Amazon DynamoDB to store image vectors. Implement custom similarity search logic by using AWS Lambda functions.
+
+D. Store image vectors in Amazon OpenSearch Serverless. Use vector search capabilities for similarity searches.
+
+-
+Question 10 of 20
+
+A cross-functional team is developing a generative AI (GenAI) application by using AWS services. The team needs to optimize developer productivity and enforce consistent integration patterns. The team needs to automate performance tuning and accelerate AI testing across multiple business units.
+The team wants to use Amazon Q Developer. The team must accelerate development workflows and maintain application quality.
+
+Which combination of steps will meet these requirements?
+(Select TWO)
+A. Configure Amazon Q Developer to automatically generate and refactor integration code snippets, provide targeted API usage guidance, and suggest performance optimizations for AI components. Apply the changes across the modular code base.
+B. Integrate the Amazon Q Developer automated unit and integration test generation features into the team's CI/CD pipelines.
+C. Use Amazon Q Developer to retrospectively analyze and document common integration patterns that are found across different business units' code bases.
+D. Use Amazon Q Developer to analyze code for security best practices and suggest compliance improvements. Implement a mandatory review process where all code changes must be manually approved by security teams before integration.
+E. Incorporate Amazon Q Developer to resolve coding issues that are identified during merge requests. Reserve most refactoring and optimization tasks for periodic manual review cycles.
+
+-
+Question 11 of 20
+
+A news media company wants to develop a content conformance tool that automatically reviews and adjusts articles to ensure compliance with a style guide. Journalists need a web-based article editor that provides real-time analysis of content upon request.
+When journalists click an "analyze" button, the system should immediately begin providing suggested revisions through the editor interface. Articles are tagged with content categories in the metadata. Examples of categories include news, sports, and editorial. The company wants to use an Amazon Bedrock FM to analyze content and provide immediate feedback through the web-based article editor interface.
+
+Which architecture will meet these requirements with the LEAST operational overhead?
+
+A. Deploy an Amazon API Gateway WebSocket API linked to an AWS Lambda function. Configure the function to read the content category from metadata and route content to the appropriate Amazon Bedrock model based on the category tag. Configure the function to use Amazon Bedrock Prompt Management to enforce style guide rules. Use the Amazon Bedrock streaming API to return suggestions in real time.
+
+B. Configure an Application Load Balancer with Amazon ECS tasks that run custom containers. Implement content category routing logic and style guide checking within the containers. Use Amazon Bedrock with streaming support to generate suggestions. Use WebSocket connections to stream results to the journalists in real time.
+
+C. Implement an Amazon SQS queue for article ingestion. Create AWS Step Functions workflows to process content. Use AWS Lambda functions to determine the content category from metadata and invoke appropriate Amazon Bedrock models with style guide prompts. Store results in Amazon DynamoDB. Use an Amazon API Gateway WebSocket API for real-time streaming of suggestions to the journalists.
+
+D. Create an Amazon API Gateway REST API with AWS Lambda function URLs to enable response streaming. Configure the Lambda function to process articles and stream suggestions using chunked transfer encoding.
+
+-
+Question 12 of 20
+
+A company is developing an AI assistant that processes customer data by using Amazon Bedrock. The AI assistant has multiple guardrails. The guardrails include prompt injection detection, sensitive information filtering, and denied topic blocking.
+When a customer query is blocked, a GenAI developer needs a detailed analysis of which specific guardrail rule was invoked and why the content was flagged. Then, the GenAI developer must fine-tune guardrail configurations and distinguish between legitimate customer queries and actual security threats.
+
+Which configuration provides the MOST detailed analysis of guardrail decision-making for content filtering?
+
+A. Enable Amazon Bedrock model invocation logging to capture full request and response data. Configure Amazon CloudWatch alarms on InvocationsIntervened metrics filtered by GuardrailContentSource dimensions. Analyze patterns by using CloudWatch Insights queries to identify which content source triggered interventions.
+
+B. Configure guardrail tracing with `{"trace": "enabled"}` in guardrailConfig. Monitor InvocationsIntervened metrics filtered by the GuardrailContentSource dimension to identify whether input prompts or output responses triggered interventions.
+
+C. Configure guardrail tracing with `{"trace": "enabled"}` in guardrailConfig. Monitor InvocationsIntervened metrics filtered by the GuardrailPolicyType dimensions: ContentPolicy, TopicPolicy, and SensitiveInformationPolicy.
+
+D. Enable Amazon Bedrock model evaluation with automated evaluation jobs that include guardrail assessment metrics. Configure the evaluation framework to test prompt injection resistance by using company-specific test cases. Use the evaluation dashboard to analyze which guardrail policies are most effective at blocking malicious content while preserving legitimate queries.
+
+-
+Question 13 of 20
+
+A GenAI developer is building a virtual assistant application by using an Anthropic Claude model on Amazon Bedrock. The application sends user queries and expects conversational responses. The GenAI developer wants to configure the application to stop generating output after a specific phrase is generated in the response.
+
+Which solution will meet these requirements?
+
+A. Use the top-k parameter to control the diversity of tokens in the model's output.
+
+B. Use the temperature parameter in the inference call to control the likelihood of the phrase appearing.
+
+C. Use the stop sequences parameter in the inference call to specify a trigger phrase.
+
+D. Add the trigger phrase "stop at this phrase" in the user prompt.
+
+-
+Question 14 of 20
+
+A company uses an AI assistant to answer customer questions based on internal company documents. The company wants to include new documents in the assistant's responses as soon as possible. The company wants to exclude deleted documents from the AI assistant's responses as soon as possible.
+
+The documents are stored in Amazon S3. The AI assistant uses Amazon Bedrock Knowledge Bases. Amazon S3 is the data source of the vector store that the company uses for RAG. A GenAI developer must create a scalable, event-driven, and resilient solution.
+
+
+Which solution will meet these requirements?
+
+
+A. Configure S3 Event Notifications to invoke an AWS Lambda function on object-created and object-deleted events. Configure the Lambda function to invoke IngestKnowledgeBaseDocuments for new objects and DeleteKnowledgeBaseDocuments for deleted objects.
+
+B. Configure Amazon EventBridge Scheduler to schedule a rule that runs every 5 minutes and invokes an AWS Lambda function. Configure the Lambda function to sync the documents in Amazon S3 with the knowledge base by invoking StartIngestionJob.
+
+C. Configure S3 Event Notifications to send object-created and object-deleted events to an Amazon SQS queue. Create an AWS Lambda function to poll the queue and invoke IngestKnowledgeBaseDocuments for new objects and DeleteKnowledgeBaseDocuments for deleted objects.
+
+D. Configure Amazon EventBridge Scheduler to schedule a rule that runs every 5 minutes and invokes an AWS Lambda function. Configure the Lambda function to track changes in Amazon S3 and invoke IngestKnowledgeBaseDocuments for new objects and DeleteKnowledgeBaseDocuments for deleted objects.
+
+-
+Question 15 of 20
+A company needs secure authentication for a third-party application that uses Amazon Bedrock. The solution must integrate with the company's existing identity provider (IdP). The solution must maintain comprehensive audit logs of authentication and API calls. The solution must eliminate long-lived credentials and provide temporary access to Amazon Bedrock.
+
+
+Which solutions will meet these requirements?
+(Select TWO)
+A. Create an IAM role and configure federation by using AWS STS AssumeRole API calls. Store the application's IAM user credentials in the application configuration.
+B. Implement an OpenID Connect (OIDC) integration with Amazon Cognito. Configure the integration to authenticate users through the IdP and exchange tokens for temporary AWS credentials. Configure the integration to allow the application to access Amazon Bedrock.
+C. Configure an Amazon API Gateway Lambda authorizer. Configure the authorizer to validate credentials against the company's LDAP server and then issue signed JSON Web Tokens (JWTs) for Amazon Bedrock access.
+D. Deploy AWS IAM Identity Center with SAML federation to the IdP. Configure custom permission sets that grant access to Amazon Bedrock.
+E. Create IAM users for each employee that needs access to the application. Assign permissions through IAM policies. Implement credential rotation by using AWS Secrets Manager.
+
+-
+Question 16 of 20
+
+A financial services company wants to develop a mobile app that will help users with account inquiries and general account information. The company has a large amount of email exchange data between customers and support staff to use as source material. The data is stored in an Amazon S3 bucket and contains personally identifiable information (PII) that should not appear in search results.
+
+
+Which solution will meet these requirements?
+
+
+A. Use Amazon Kendra to enable enterprise search of the email data that is stored in Amazon S3. Integrate Amazon Kendra with an Amazon Bedrock FM. Use a system prompt to identify and remove PII during query processing.
+
+B. Use Amazon Comprehend to detect and redact PII from the email data that is stored in Amazon S3. Integrate Amazon Comprehend with Amazon DocumentDB to enable database queries for enterprise search.
+
+C. Use Amazon Textract to extract text from the email data. Use Amazon Macie to scan for PII in Amazon S3. Integrate Amazon Textract and Amazon S3 with Amazon Kendra to enable enterprise search of the processed data.
+
+D. Use Amazon Comprehend to detect and redact PII from the email data that is stored in Amazon S3. Integrate Amazon Comprehend with Amazon Kendra to enable enterprise search of the processed data.
+
+-
+Question 17 of 20
+
+An education company built a content generation system on Amazon Bedrock. The system generates practice questions to quiz end users on a topic to test their knowledge. The system consumes a mix of curated data and scraped data in the topic domain. Reviewers must approve of the generated question-response sets before end users can access the sets. The company wants to improve the system by adding source lineage for the reviewers to verify the credibility of the content.
+
+
+Which combination of steps will meet these requirements with the LEAST operational overhead?
+(Select TWO)
+A. Tag FM outputs with metadata from the data source.
+B. Use AWS CloudTrail to log reviewer feedback actions.
+C. Use Amazon SageMaker Clarify to explain model predictions.
+D. Register the curated and scraped input datasets with AWS Glue Data Catalog.
+E. Enable Amazon Bedrock invocation logging and correlate the logs with the data source.
+
+-
+Question 18 of 20
+
+A company runs a question-answering application. The application uses an Amazon Bedrock knowledge base that ingests documents from multiple Amazon S3 buckets. The company needs to monitor the data ingestion process to identify and troubleshoot any issues with document processing.
+
+
+Which solution will meet these requirements to monitor knowledge base operations?
+
+A. Configure knowledge base logging with Amazon CloudWatch Logs as the destination. Use CloudWatch Logs Insights to query for failed document processing.
+
+B. Enable Amazon CloudWatch Application Signals to automatically detect and alert on knowledge base performance issues.
+
+C. Enable AWS CloudTrail to track all API calls that relate to knowledge base operations and document ingestion activities.
+
+D. Implement Amazon Bedrock model invocation logging to capture detailed metrics about document processing and embedding generation.
+
+-
+Question 19 of 20
+
+A company wants to create an application to analyze fashion trends. The application must analyze videos and photos from public fashion shows to understand style elements and trends. The solution must store the extracted information and provide a dashboard that summarizes the fashion trends.
+
+Which solution will meet these requirements with the LEAST operational overhead?
+
+A. Use AWS Step Functions to process videos and photos from fashion shows by using Amazon Bedrock multimodal FMs. Store analysis results in Amazon S3. Use an Amazon Quick Sight dashboard to visualize trends in the data.
+
+B. Use Amazon EventBridge to trigger AWS Lambda functions that use Amazon Quick Suite to analyze videos and photos from fashion shows. Store analysis results in Amazon S3. Deploy an Amazon Quick Sight dashboard with ML-powered trend analysis.
+
+C. Use an Anthropic Claude model in Amazon Bedrock to analyze text descriptions from fashion show videos and photos. Use Stable Diffusion for image analysis. Store results in Amazon OpenSearch Service. Create a dashboard by using Amazon Managed Grafana with OpenSearch visualizations.
+
+D. Use Amazon Rekognition Custom Labels to train a custom model for fashion trend analysis. Store results in Amazon DynamoDB. Create a dashboard using Amazon Managed Grafana with custom plugins for fashion trend analytics.
+
+-
+Question 20 of 20
+
+A company is developing a RAG application by using Amazon Bedrock. The application processes customer support documents. Initially, the application retrieves many relevant documents. However, users report that the most relevant information often appears lower in the results. The company wants to improve the relevance ranking of retrieved results to ensure that the most useful information appears first.
+
+Which combination of steps will improve the relevance of retrieved results with MINIMAL operational overhead?
+(Select TWO)
+A. Configure Amazon OpenSearch Serverless with the Amazon Bedrock Knowledge Bases plugin. Use OpenSearch's Learning to Rank feature for relevance scoring. Integrate relevance scoring with Knowledge Bases for result reranking.
+B. Use Amazon Bedrock reranker models with Amazon OpenSearch Service to reorder retrieved results based on semantic relevance to the query.
+C. Use Knowledge Bases with hybrid search capabilities and Amazon OpenSearch Serverless to combine vector embeddings with keyword matching.
+D. Create an Amazon Aurora PostgreSQL database with the pgvector extension to store document embeddings. Create a similarity scoring algorithm that combines vector distances with document metadata to rank results.
+E. Use Amazon SageMaker JumpStart FMs with Amazon Kendra Intelligent Ranking to create custom relevancy scoring algorithms.
+
