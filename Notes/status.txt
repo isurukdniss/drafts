@@ -1,0 +1,30 @@
+Status - 26/10/2026
+
+Attachment Sync (In progress):
+Tested Linked Server setup and is working
+Found few edge cases and fixed
+Dengli reviewed and feedback given
+	- In IPS side, Attachments are insert and soft delete only. No update. No hard delete (checked the code and confirmed)
+	- No direct change to AttachmentBinary without a change to Attachment (checked the code and confirmed)
+	- DsoActivityType: ED -> TD -> ED change - found a bug and fixed
+	- No triggers will be required. compare state (attachmentId, isActive) between source vs destination will be sufficient. making the changes and testing
+	- Exclude BIF attachments from the sync
+	- Dengli to confirm whether to soft delete or hard delete at the destination 
+Time needed: 1 day
+
+BIF Sync (In progress):
+Implementation is in progress
+	- Identifiy desired projects to generate BIF - ok
+	- File download - ok
+	- Write to destination - ok
+	- Testing - in progress
+Authentication and authorization
+	- Works without providing username/password. HTTP request uses windows credentials
+	- Checked with Sherlin and confirmed the uat/prod works same
+	- No specific authorization is in place. Only authentication is enough.
+
+Time needed: 3 days
+
+Review comments:
+	- Not started
+  - (check the complexity and determine)
